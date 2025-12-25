@@ -2,6 +2,6 @@ streamlit
 transformers
 torch
 plotly
-kaleido
+kaleido==0.2.1
 pandas
 scipy

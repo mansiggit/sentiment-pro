@@ -1,8 +1,9 @@
 import streamlit as st
 import pandas as pd
+import kaleido  # Import this BEFORE plotly
+import plotly.express as px
 from engine import SentimentAnalyzer
 import io
-import plotly.express as px
 
 # 1. Page Configuration
 st.set_page_config(page_title="Sentix AI", page_icon="📈", layout="wide")
@@ -92,4 +93,5 @@ with tab2:
                         mime="text/csv",
                     )
         else:
+
             st.error("Error: The uploaded CSV must have a column named exactly 'text'.")

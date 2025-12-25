@@ -18,7 +18,7 @@
 ## 📦 Installation & Setup
 1. **Clone the repo:**
    ```bash
-   git clone [https://github.com/mansiggit/sentiment-pro.git](https://github.com/mansiggit/sentix-ai.git)
+   git clone [https://github.com/mansiggit/sentiment-pro.git](https://github.com/mansiggit/sentiment-pro.git)
    cd sentix-ai
 2. **Create a Virtual Environment:**
    ```bash

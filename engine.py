@@ -1,18 +1,31 @@
+import os
 from transformers import pipeline
+
 
 class SentimentAnalyzer:
     def __init__(self):
-        # This model is a beast—it handles 20+ languages including Hindi, French, Spanish
-        model_path = "tabularisai/multilingual-sentiment-analysis"
-        self.analyzer = pipeline("sentiment-analysis", model=model_path)
+        # Model name is env-driven so it can be swapped without code changes
+        # and so any future gated/private model follows the same pattern.
+        model_path = os.environ.get(
+            "SENTIMENT_MODEL_PATH",
+            "tabularisai/multilingual-sentiment-analysis",
+        )
+
+        # Optional HF token for private/gated models or higher rate limits.
+        hf_token = os.environ.get("HUGGINGFACE_HUB_TOKEN") or None
+
+        self.analyzer = pipeline(
+            "sentiment-analysis",
+            model=model_path,
+            token=hf_token,
+        )
 
     def analyze(self, text):
         if not text or str(text).strip() == "":
             return None
 
         result = self.analyzer(text)[0]
-        # This model returns labels like 'very negative', 'neutral', etc.
         return {
-            "sentiment": result['label'].title(),
-            "confidence": f"{round(result['score'] * 100, 2)}%"
+            "sentiment": result["label"].title(),
+            "confidence": f"{round(result['score'] * 100, 2)}%",
         }
